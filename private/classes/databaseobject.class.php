@@ -12,6 +12,24 @@ class DatabaseObject {
     }
 
 
+    // run sql statements
+    static public function find_by_sql($sql) {
+        $result = self::$database->query($sql);
+        if(!$result) {
+            exit("Database query failed.");
+        }
+
+        // results into objects
+        $object_array = [];
+        while($record = $result->fetch_assoc()) {
+            $object_array[] = static::instantiate($record);
+        }
+
+        $result->free();
+
+        return $object_array;
+    }
+
     static public function find_all() {
         $sql = "SELECT * FROM " . static::$table_name;
         return static::find_by_sql($sql);
@@ -64,7 +82,7 @@ class DatabaseObject {
     }
 
     public function save() {
-        // A new record will not have an ID yet
+        // will create a new record if id is not set
         if(isset($this->id)) {
             return $this->update();
         } else {
@@ -77,24 +95,6 @@ class DatabaseObject {
         $sql .= "WHERE id='" . self::$database->escape_string($this->id) . "' ";
         $sql .= "LIMIT 1";
         return self::$database->query($sql);
-    }
-
-    // run sql statements
-    static public function find_by_sql($sql) {
-        $result = self::$database->query($sql);
-        if(!$result) {
-            exit("Database query failed.");
-        }
-
-        // results into objects
-        $object_array = [];
-        while($record = $result->fetch_assoc()) {
-            $object_array[] = static::instantiate($record);
-        }
-
-        $result->free();
-
-        return $object_array;
     }
 
     // create an instance of object and assign db records to it
@@ -116,6 +116,7 @@ class DatabaseObject {
         return $this->errors;
     }
 
+    // used by edit pages to merge previous and updated values
     public function merge_attributes($args=[]) {
         foreach($args as $key => $value) {
             if(property_exists($this, $key) && !is_null($value)) {

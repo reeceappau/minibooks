@@ -6,7 +6,7 @@ require_login();
 
 
 
-if(!isset($_GET['id']) && $_GET['id'] != $session->admin_id) {
+if(!isset($_GET['id']) && $_GET['id'] != $session->user_id) {
     redirect_to(url_for('index.php'));
 }
 $id = $_GET['id'];

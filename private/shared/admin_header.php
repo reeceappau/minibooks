@@ -4,7 +4,6 @@
 <head>
     <title>MiniBooks <?php if(isset($page_title)) { echo '- ' . h($page_title); } ?></title>
     <meta charset="utf-8">
-    <link rel="stylesheet" media="all" href="<?php echo url_for('/stylesheets/public.css'); ?>" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
@@ -43,13 +42,11 @@
                     <a class="nav-link" href="<?php echo url_for('/admin/users/index.php'); ?>">Users</a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo url_for('/admin/users/edit.php?id='. $session->admin_id); ?>" class="dropdown-item nav-link">Profile</a>
+                    <a href="<?php echo url_for('/admin/users/edit.php?id='. $session->user_id); ?>" class="dropdown-item nav-link">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo url_for('/admin/logout.php'); ?>" class="dropdown-item nav-link">Logout</a>
+                    <a href="<?php echo url_for('/logout.php'); ?>" class="dropdown-item nav-link">Logout</a>
                 </li>
-
-
             </ul>
             <!-- Left links -->
         </div>

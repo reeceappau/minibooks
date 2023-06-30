@@ -46,7 +46,7 @@
                 <?php } ?>
                 <?php if ($session->is_logged_in()) {?>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo url_for('/profile.php?id='. $session->admin_id); ?>">Profile</a>
+                        <a class="nav-link" href="<?php echo url_for('/profile.php?id='. $session->user_id); ?>">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo url_for('/logout.php'); ?>">Logout</a>

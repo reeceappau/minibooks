@@ -37,20 +37,6 @@ function has_length($value, $options) {
     }
 }
 
-//  validate inclusion in a set
-function has_inclusion_of($value, $set) {
-    return in_array($value, $set);
-}
-
-// validate exclusion from a set
-function has_exclusion_of($value, $set) {
-    return !in_array($value, $set);
-}
-
-// validate inclusion of character(s)
-function has_string($value, $required_string) {
-    return strpos($value, $required_string) !== false;
-}
 
 // * validate correct format for email addresses
 function has_valid_email_format($value) {
@@ -62,10 +48,8 @@ function has_valid_email_format($value) {
 function has_unique_username($username, $current_id="0") {
     $admin = User::find_by_username($username);
     if($admin === false || $admin->id == $current_id) {
-        // is unique
         return true;
     } else {
-        // not unique
         return false;
     }
 }
