@@ -5,7 +5,7 @@
 <div class="container">
 
     <div class="px-4 py-5 my-5 text-center">
-        <img class="d-block mx-auto mb-4" src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        <img class="d-block mx-auto mb-4" src="<?php echo url_for('/images/logo.png'); ?>" alt="" >
         <h1 class="display-5 fw-bold">MiniBooks</h1>
         <div class="col-lg-6 mx-auto">
             <p class="lead mb-4">#1 bookstore in Ghana.</p>
