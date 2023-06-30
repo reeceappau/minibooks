@@ -55,6 +55,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo url_for('/login.php'); ?>">Log In</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo url_for('/register.php'); ?>">Register</a>
+                    </li>
                 <?php } ?>
             </ul>
         </div>
