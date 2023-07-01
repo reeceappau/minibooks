@@ -39,6 +39,7 @@ if(is_post_request()) {
 
 <?php $page_title = 'Log in'; ?>
 <?php include(SHARED_PATH . '/public_header.php'); ?>
+<?php echo display_session_message(); ?>
 
 <div class="container">
     <h1 class="h3">Log in</h1>

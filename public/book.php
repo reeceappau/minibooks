@@ -15,6 +15,10 @@ if($book == false) {
 }
 
 if (is_post_request()) {
+    if (!isset($session->user_id)) {
+        $session->message("Log in to add items to cart");
+        redirect_to(url_for('/login.php'));
+    }
     $quantity = $_POST['quantity'];
 
     $session->add_to_cart($id, $quantity);
