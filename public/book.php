@@ -14,6 +14,16 @@ if($book == false) {
     redirect_to(url_for('/index.php'));
 }
 
+if (is_post_request()) {
+    $quantity = $_POST['quantity'];
+
+    $session->add_to_cart($id, $quantity);
+    $session->message('Book added to cart');
+    redirect_to(url_for('/cart.php'));
+
+}
+
+
 ?>
 
 
@@ -38,6 +48,14 @@ if($book == false) {
                 <div class="d-inline m-2 text-muted">
                     Year: <?php echo h($book->year); ?>
                 </div>
+            </div>
+
+            <div>
+                <form action="<?php echo url_for('/book.php?id=' . h(u($book->id))); ?>" method="post">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" name="quantity" min="1" max="<?php echo $book->quantity;?>" value="1">
+                    <input class="btn btn-primary d-inline" type="submit" value="Add to Cart" />
+                </form>
             </div>
 
             <div>

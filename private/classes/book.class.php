@@ -3,7 +3,7 @@
 class Book extends DatabaseObject {
 
     static protected $table_name = "books";
-    static protected $db_columns = ['id', 'title', 'pages', 'year', 'description', 'author'];
+    static protected $db_columns = ['id', 'title', 'pages', 'year', 'description', 'author', 'quantity'];
 
     public $id;
     public $title;
@@ -11,6 +11,7 @@ class Book extends DatabaseObject {
     public $year;
     public $description;
     public $author;
+    public $quantity;
 
     public function __construct($args=[]) {
         $this->title = $args['title'] ?? '';
@@ -18,6 +19,7 @@ class Book extends DatabaseObject {
         $this->year = $args['year'] ?? '';
         $this->description = $args['description'] ?? '';
         $this->author = $args['author'] ?? '';
+        $this->quantity = $args['quantity'] ?? '';
     }
 
     public function name(): string {
@@ -53,6 +55,12 @@ class Book extends DatabaseObject {
 
         if(is_blank($this->description)) {
             $this->errors[] = "Please add some description.";
+        }
+
+        if(is_blank($this->quantity)) {
+            $this->errors[] = "Quantity cannot be blank.";
+        } elseif (!has_length_greater_than($this->quantity, 1)) {
+            $this->errors[] = "Quantity cannot be less than one";
         }
     }
 

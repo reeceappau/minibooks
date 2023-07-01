@@ -33,3 +33,8 @@ if(!isset($book)) {
     <label for="bookDescription">Description</label>
     <textarea name="book[description]" class="form-control" id="bookDescription" rows="3"><?php echo h($book->description); ?></textarea>
 </div>
+
+<div class="form-group">
+    <label for="bookQuantity">Quantity</label>
+    <input type="number" class="form-control" id="bookQuantity" name="book[quantity]" placeholder="Units available" value="<?php echo h($book->quantity); ?>">
+</div>

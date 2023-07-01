@@ -51,6 +51,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo url_for('/logout.php'); ?>">Logout</a>
                     </li>
+                    <?php if (isset($session->cart)) {?>
+                    <li class="pl-5 nav-item">
+                        <a class="nav-link" href="<?php echo url_for('/cart.php'); ?>">Cart (<?php echo $session->cart_count(); ?>)</a>
+                    </li>
+                        <?php } ?>
                 <?php } else {?>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo url_for('/login.php'); ?>">Log In</a>

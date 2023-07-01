@@ -68,7 +68,7 @@ if(is_post_request()) {
                     <input type="password" class="form-control" id="userConfirmPassword" name="user[confirm_password]" >
                 </div>
 
-                <div id="operations">
+                <div class="form-group">
                     <input class="btn btn-primary" type="submit" value="Create User" />
                 </div>
             </form>

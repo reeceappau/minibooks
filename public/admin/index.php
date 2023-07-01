@@ -29,8 +29,7 @@ $books = Book::find_all();
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
                     <th scope="col">Author</th>
-                    <th scope="col">Pages</th>
-                    <th scope="col">Year</th>
+                    <th scope="col">Quantity</th>
                     <th scope="col">&nbsp;</th>
                     <th scope="col">&nbsp;</th>
                     <th scope="col">&nbsp;</th>
@@ -42,8 +41,7 @@ $books = Book::find_all();
                         <th scope="row"><?php echo h($book->id); ?></th>
                         <td><?php echo h($book->title); ?></td>
                         <td><?php echo h($book->author); ?></td>
-                        <td><?php echo h($book->pages); ?></td>
-                        <td><?php echo h($book->year); ?></td>
+                        <td><?php echo h($book->quantity); ?></td>
                         <td><a class="link-primary" href="<?php echo url_for('/admin/books/show.php?id=' . h(u($book->id))); ?>">View</a></td>
                         <td><a class="link-primary" href="<?php echo url_for('/admin/books/edit.php?id=' . h(u($book->id))); ?>">Edit</a></td>
                         <td><a class="link-danger" href="<?php echo url_for('/admin/books/delete.php?id=' . h(u($book->id))); ?>">Delete</a></td>

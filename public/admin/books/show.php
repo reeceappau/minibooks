@@ -41,6 +41,9 @@ if($book == false) {
                 <div class="d-inline m-2 text-muted">
                     Year: <?php echo h($book->year); ?>
                 </div>
+                <div class="d-inline m-2 text-muted">
+                    Quantity: <?php echo h($book->quantity); ?>
+                </div>
             </div>
 
             <div>
