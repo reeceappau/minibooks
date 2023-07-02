@@ -34,6 +34,7 @@ $books = Book::find_all();
             <div class="card-body">
                 <h4 class="card-title"><?php echo h($book->title); ?></h4>
                 <h6 class="card-subtitle mb-2 text-muted"><?php echo h($book->author); ?></h6>
+                <h6 class="card-subtitle my-3">GHS<?php echo h($book->price); ?></h6>
                 <p class="card-text"><?php echo h(substr($book->description, 0, 150));?>...</p>
                 <a href="<?php echo url_for('/book.php?id=' . h(u($book->id))); ?>" class="card-link">View</a>
 <!--                <form action="--><?php //echo url_for('/books.php?id=' . h(u($book->id)) . "&title=" . h(u($book->title))); ?><!--" method="post">-->

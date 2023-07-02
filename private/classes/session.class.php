@@ -6,6 +6,7 @@ class Session {
     public $username;
     public $role;
     public $cart;
+    public $cart_total = 0;
     private $last_login;
 
     public const MAX_LOGIN_AGE = 60*60*24*3; // 3 days
@@ -44,11 +45,13 @@ class Session {
         unset($_SESSION['role']);
         unset($_SESSION['message']);
         unset($_SESSION['cart']);
+        unset($_SESSION['cart_total']);
         unset($this->user_id);
         unset($this->username);
         unset($this->last_login);
         unset($this->role);
         unset($this->cart);
+        unset($this->cart_total);
         return true;
     }
 
@@ -65,16 +68,12 @@ class Session {
     private function check_stored_cart() {
         if(isset($_SESSION['cart'])) {
             $this->cart = $_SESSION['cart'];
+            $this->cart_total = $_SESSION['cart_total'];
         }
     }
 
     public function cart_count() {
-        $quantities = array_values($this->cart);
-        $count = 0;
-        foreach ($quantities as $quantity) {
-            $count += $quantity;
-        }
-        return $count;
+        return count($this->cart);
     }
 
     private function last_login_is_recent() {
@@ -102,35 +101,55 @@ class Session {
         unset($_SESSION['message']);
     }
 
-    public function add_to_cart($id, $quantity) {
+    public function add_to_cart($id, $quantity, $price) {
         if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
             if (array_key_exists($id, $_SESSION['cart'])) {
                 // update existing cart item
                 $_SESSION['cart'][$id] += (int)$quantity;
+                $_SESSION['cart_total'] += $price;
                 $this->cart = $_SESSION['cart'];
+                $this->cart_total = $_SESSION['cart_total'];
             } else {
                 // add new cart item
                 $_SESSION['cart'][$id] = (int)$quantity;
+                $_SESSION['cart_total'] += $price;
                 $this->cart = $_SESSION['cart'];
+                $this->cart_total = $_SESSION['cart_total'];
             }
         } else {
             // create new session cart array
             $_SESSION['cart'] = array($id => (int)$quantity);
+            $_SESSION['cart_total'] = $price;
             $this->cart = $_SESSION['cart'];
+            $this->cart_total = $_SESSION['cart_total'];
         }
     }
 
-    public function update_cart($id, $quantity) {
+    public function update_cart($id, $quantity, $price) {
         $_SESSION['cart'][$id] = (int)$quantity;
+        $previous_total = $this->cart[$id] * $price;
+        $_SESSION['cart_total'] = $_SESSION['cart_total'] - $previous_total + ($price*$quantity);
         $this->cart = $_SESSION['cart'];
+        $this->cart_total = $_SESSION['cart_total'];
     }
 
-    public function remove_from_cart($id) {
+    public function remove_from_cart($id, $price) {
         if (isset($_SESSION['cart']) && isset($_SESSION['cart'][$id])) {
-            // Remove the book from the cart
+            // update cart total and remove book from cart
+            $previous_total = $_SESSION['cart'][$id] * $price;
+            $_SESSION['cart_total'] -= $previous_total;
+            $this->cart_total = $_SESSION['cart_total'];
             unset($_SESSION['cart'][$id]);
-            unset($this->cart);
+            unset($this->cart[$id]);
         }
+    }
+
+    public function delete_cart() {
+        unset($_SESSION['cart']);
+        unset($_SESSION['cart_total']);
+        unset($this->cart);
+        unset($this->cart_total);
+        return true;
     }
 }
 

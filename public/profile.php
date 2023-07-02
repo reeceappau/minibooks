@@ -25,14 +25,15 @@ if(is_post_request()) {
 
     if ($result === true) {
         $session->message('Changes made successfully.');
-        redirect_to(url_for('/index.php'));
+        redirect_to(url_for('/profile.php?id='. $id));
     }
 }
 
 ?>
 
-<?php $page_title = 'Edit Admin'; ?>
+<?php $page_title = 'Profile'; ?>
 <?php include(SHARED_PATH . '/public_header.php'); ?>
+<?php echo display_session_message(); ?>
 
     <div class="container">
 

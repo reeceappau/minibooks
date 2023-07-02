@@ -38,3 +38,8 @@ if(!isset($book)) {
     <label for="bookQuantity">Quantity</label>
     <input type="number" class="form-control" id="bookQuantity" name="book[quantity]" placeholder="Units available" value="<?php echo h($book->quantity); ?>">
 </div>
+
+<div class="form-group">
+    <label for="bookPrice">Price</label>
+    <input type="number" step=".01" class="form-control" id="bookPrice" name="book[price]" placeholder="Unit Price" value="<?php echo h($book->price); ?>">
+</div>

@@ -22,6 +22,7 @@ require_once('classes/session.class.php');
 require_once('classes/databaseobject.class.php');
 require_once('classes/user.class.php');
 require_once('classes/book.class.php');
+require_once('classes/order.class.php');
 
 $database = db_connect();
 DatabaseObject::set_database($database);

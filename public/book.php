@@ -20,8 +20,9 @@ if (is_post_request()) {
         redirect_to(url_for('/login.php'));
     }
     $quantity = $_POST['quantity'];
+    $price = $_POST['price'];
 
-    $session->add_to_cart($id, $quantity);
+    $session->add_to_cart($id, $quantity, $price);
     $session->message('Book added to cart');
     redirect_to(url_for('/cart.php'));
 
@@ -52,12 +53,20 @@ if (is_post_request()) {
                 <div class="d-inline m-2 text-muted">
                     Year: <?php echo h($book->year); ?>
                 </div>
+                <div class="d-inline m-2 text-muted">
+                    Year: <?php echo h($book->quantity); ?>
+                </div>
+            </div>
+
+            <div>
+                Price: <?php echo h($book->price);?>
             </div>
 
             <div>
                 <form action="<?php echo url_for('/book.php?id=' . h(u($book->id))); ?>" method="post">
                     <label for="quantity">Quantity</label>
                     <input type="number" id="quantity" name="quantity" min="1" max="<?php echo $book->quantity;?>" value="1">
+                    <input type="hidden" name="price" value="<?php echo $book->price;?>">
                     <input class="btn btn-primary d-inline" type="submit" value="Add to Cart" />
                 </form>
             </div>

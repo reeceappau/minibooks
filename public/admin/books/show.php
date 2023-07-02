@@ -47,6 +47,10 @@ if($book == false) {
             </div>
 
             <div>
+                Price: <?php echo h($book->price);?>
+            </div>
+
+            <div>
                 <?php echo h($book->description); ?>
             </div>
 
