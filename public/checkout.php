@@ -43,7 +43,7 @@ $user = User::find_by_id($id);
         e.preventDefault();
 
         let handler = PaystackPop.setup({
-            key: 'pk_test_3f19a3c55ec7e142496d3510d4b992da8a067771', // Replace with your public key
+            key: 'p_key', // Replace p_key with your public key
             email: document.getElementById("userEmail").value,
             amount: document.getElementById("cartTotal").value * 100,
             currency: 'GHS',
