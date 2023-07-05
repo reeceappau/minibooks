@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 03, 2023 at 10:53 PM
+-- Generation Time: Jul 05, 2023 at 07:38 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,7 +44,7 @@ CREATE TABLE `books` (
 
 INSERT INTO `books` (`id`, `title`, `author`, `pages`, `year`, `description`, `quantity`, `price`) VALUES
 (1, 'Rich Dad Poor Dad', 'Robert Kiyosaki', 336, '1998', 'Rich Dad Poor Dad came out in 1997 and focuses on the importance of financial literacy from an early age. Throughout the book, the author explains how a person can increase their wealth by investing in assets and by being smart with money.', 25, 65.00),
-(4, 'Book 2', 'Reece Appau', 312, '2020', 'slmkafn', 4, 24.99);
+(8, 'Think & Grow Rich', 'Napoleon Hill', 238, '1937', 'Think and Grow Rich is a book written by Napoleon Hill released in 1937 and promoted as a personal development and self-improvement book. He claimed to be inspired by a suggestion from business magnate and later-philanthropist Andrew Carnegie. However there is no evidence that the two ever met', 100, 79.99);
 
 -- --------------------------------------------------------
 
@@ -61,6 +61,17 @@ CREATE TABLE `orders` (
   `reference` varchar(255) NOT NULL,
   `date_time` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `book_id`, `quantity`, `amount`, `reference`, `date_time`) VALUES
+(1, 12, '4,1', '4,2', 10000, '485439022', '01/07/23 19:14'),
+(3, 12, '1', '1', 2000, '54043601', '01/07/23 19:31'),
+(4, 5, '1', '3', 19000, '486600765', '02/07/23 13:05'),
+(5, 5, '1', '1', 6500, '652863670', '02/07/23 13:32'),
+(6, 12, '1', '1', 6500, '434257791', '03/07/23 20:38');
 
 -- --------------------------------------------------------
 
@@ -83,8 +94,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `role`, `email`, `hashed_password`) VALUES
-(1, 'Admin', 'User', 'admin', 'admin', 'admin@user.com', '$2y$10$7CVCHMfIleSxu/ykUwpmeOzXzKxCKv22.yjJj.8fIJmPqj71V1ZNa'),
-(2, 'User', 'User', 'user', 'admin', 'user@user.com', '$2y$10$qSLEhU38MStgWeNI.yNIJO8HviWdrf07fyd1fT9lenufl3VQwRvri');
+(16, 'Admin', 'User', 'admin', 'admin', 'admin@user.com', '$2y$10$7CVCHMfIleSxu/ykUwpmeOzXzKxCKv22.yjJj.8fIJmPqj71V1ZNa'),
+(17, 'User', 'User', 'user', 'user', 'user@user.com', '$2y$10$qSLEhU38MStgWeNI.yNIJO8HviWdrf07fyd1fT9lenufl3VQwRvri');
 
 --
 -- Indexes for dumped tables
@@ -100,14 +111,15 @@ ALTER TABLE `books`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id_index` (`user_id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `index_username` (`username`);
+  ADD KEY `username_index` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -117,7 +129,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `orders`

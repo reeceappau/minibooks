@@ -19,7 +19,7 @@ if (is_post_request()) {
         $session->message("Log in to add items to cart");
         redirect_to(url_for('/login.php'));
     }
-    $quantity = $_POST['quantity'];
+    $quantity = 1;
     $price = $_POST['price'];
 
     $session->add_to_cart($id, $quantity, $price);
@@ -64,10 +64,10 @@ if (is_post_request()) {
 
             <div>
                 <form action="<?php echo url_for('/book.php?id=' . h(u($book->id))); ?>" method="post">
-                    <label for="quantity">Quantity</label>
-                    <input type="number" id="quantity" name="quantity" min="1" max="<?php echo $book->quantity;?>" value="1">
+<!--                    <label for="quantity">Quantity</label>-->
+<!--                    <input type="number" id="quantity" name="quantity" min="1" max="--><?php //echo $book->quantity;?><!--" value="1">-->
                     <input type="hidden" name="price" value="<?php echo $book->price;?>">
-                    <input class="btn btn-primary d-inline" type="submit" value="Add to Cart" />
+                    <input class="btn btn-primary d-inline my-2" type="submit" value="Add to Cart" />
                 </form>
             </div>
 

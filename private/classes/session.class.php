@@ -106,13 +106,13 @@ class Session {
             if (array_key_exists($id, $_SESSION['cart'])) {
                 // update existing cart item
                 $_SESSION['cart'][$id] += (int)$quantity;
-                $_SESSION['cart_total'] += $price;
+                $_SESSION['cart_total'] += $price*$quantity;
                 $this->cart = $_SESSION['cart'];
                 $this->cart_total = $_SESSION['cart_total'];
             } else {
                 // add new cart item
                 $_SESSION['cart'][$id] = (int)$quantity;
-                $_SESSION['cart_total'] += $price;
+                $_SESSION['cart_total'] = $price*$quantity;
                 $this->cart = $_SESSION['cart'];
                 $this->cart_total = $_SESSION['cart_total'];
             }
